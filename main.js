@@ -1,3 +1,5 @@
+
+
 // <!-- HTML: Make sure the necessary HTML structure and classes are present. -->
 const navbar = document.querySelector(".navlink");
 
@@ -154,21 +156,6 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-window.addEventListener("scroll",()=>{
-  let offset = window.pageYOffset;
-  for(i = 0 ; i < cont.length ; i++){
-  cont[i].style.backgroundPositionY = offset*0.7 + "px";}
-});
-
-window.addEventListener("scroll",()=>{
-  let image = document.querySelector(".review_head");
-  let offset = window.pageYOffset;
-  for(i = 0 ; i < contreview.length ; i++){
- ;
-  image.style.backgroundPosition = "center"+" "+(offset*0.015)+"%";
-    console.log(offset*0.08);
-  }
-});
 
 window.addEventListener("scroll",()=>{
   if(window.scrollY>=8){
@@ -187,49 +174,22 @@ window.addEventListener("scroll",()=>{
   }
 })
 
-// ---------------- Image Galary -0--------------------------- 
-const track = document.getElementById("image-track");
 
-const handleOnDown = e => track.dataset.mouseDownAt = e.clientX;
+const Scrollbar = window.Scrollbar;
+    Scrollbar.init(document.querySelector('body'), 0.1);
 
-const handleOnUp = () => {
-  track.dataset.mouseDownAt = "0";  
-  track.dataset.prevPercentage = track.dataset.percentage;
-}
-
-const handleOnMove = e => {
-  if(track.dataset.mouseDownAt === "0") return;
-  
-  const mouseDelta = parseFloat(track.dataset.mouseDownAt) - e.clientX,
-        maxDelta = window.innerWidth / 1;
-  
-  const percentage = (mouseDelta / maxDelta) * -100,
-        nextPercentageUnconstrained = parseFloat(track.dataset.prevPercentage) + percentage,
-        nextPercentage = Math.max(Math.min(nextPercentageUnconstrained, 0), -100);
-  
-  track.dataset.percentage = nextPercentage;
-  
-  track.animate({
-    transform: `translate(${nextPercentage}%, -50%)`
-  }, { duration: 1200, fill: "forwards" });
-  
-  for(const image of track.getElementsByClassName("image")) {
-    image.animate({
-      objectPosition: `${100 + nextPercentage}% center`
-    }, { duration: 1200, fill: "forwards" });
-  }
-}
-
-/* -- Had to add extra lines for touch events -- */
-
-window.onmousedown = e => handleOnDown(e);
-
-window.ontouchstart = e => handleOnDown(e.touches[0]);
-
-window.onmouseup = e => handleOnUp(e);
-
-window.ontouchend = e => handleOnUp(e.touches[0]);
-
-window.onmousemove = e => handleOnMove(e);
-
-window.ontouchmove = e => handleOnMove(e.touches[0]);
+// -------------- image gallry ------------------- 
+$('.img-slider-gallary').slick({
+  slidesToShow: 6,
+  slidesToScroll: 1,
+  autoplay: true,
+  autoplaySpeed:1000,
+  responsive:[
+      {
+          breakpoint:768,
+          settings: {
+              slidesToShow:2
+          }
+      }
+  ]
+});
