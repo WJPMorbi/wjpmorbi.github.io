@@ -179,6 +179,7 @@ const Scrollbar = window.Scrollbar;
     Scrollbar.init(document.querySelector('body'), 0.1);
 
 // -------------- image gallry ------------------- 
+$(document).ready(function(){
 $('.img-slider-gallary').slick({
   slidesToShow: 6,
   slidesToScroll: 1,
@@ -192,4 +193,5 @@ $('.img-slider-gallary').slick({
           }
       }
   ]
+  });
 });
