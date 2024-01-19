@@ -6,12 +6,12 @@ const navbar = document.querySelector(".navlink");
 
 
 function openMenu() {
-  navbar.style.display = "block";
+  navbar.style.left = "0";
   navbar.style.top = "0";
 }
 
 function clsMenu() {
-    navbar.style.top = "-1000px";
+    navbar.style.left = "-100%";
 }
 
 
@@ -44,22 +44,6 @@ function clsMenu() {
     });
   }
 
-  function showPreviousContent() {
-    hideAllContent();
-    currentContent = (currentContent - 1 + cont.length) % cont.length;
-    cont[currentContent].style.display = "block";
-    cont[currentContent].style.opacity = 0.4;
-
-    let x = 0.4;
-    let intX = setInterval(function () {
-      x += 0.1;
-      cont[currentContent].style.opacity = x;
-      if (x >= 1) {
-        clearInterval(intX);
-        x = 0.4;
-      }
-    });
-  }
 
   function startAutoNext1() {
     setInterval(showNextContent, 3000);
@@ -95,22 +79,6 @@ function clsMenu() {
     });
   }
 
-  function showPreviousReview() {
-    hideAllReviews();
-    currentReview = (currentReview - 1 + contreview.length) % contreview.length;
-    contreview[currentReview].style.display = "flex";
-    contreview[currentReview].style.opacity = 0.4;
-
-    let x = 0.4;
-    let intX = setInterval(function () {
-      x += 0.1;
-      contreview[currentReview].style.opacity = x;
-      if (x >= 1) {
-        clearInterval(intX);
-        x = 0.4;
-      }
-    });
-  }
 
   function startAutoNext2() {
     setInterval(showNextReview, 3000);
@@ -163,7 +131,7 @@ window.addEventListener("scroll",()=>{
     nav.style.position = "fixed";
     nav.style.top = "0";
     nav.style.backdropFilter = "blur(5px)";
-    nav.style.padding = "0% 4%";
+    nav.style.padding = "2% 4%";
     nav.style.background = "rgb(0,0,0,0.5)";
   }else{
     let nav = document.querySelector("nav");
@@ -175,8 +143,8 @@ window.addEventListener("scroll",()=>{
 })
 
 
-const Scrollbar = window.Scrollbar;
-    Scrollbar.init(document.querySelector('body'), 0.1);
+// const Scrollbar = window.Scrollbar;
+//     Scrollbar.init(document.querySelector('body'), 0.1);
 
 // -------------- image gallry ------------------- 
 $(document).ready(function(){
@@ -185,13 +153,21 @@ $('.img-slider-gallary').slick({
   slidesToScroll: 1,
   autoplay: true,
   autoplaySpeed:1000,
-  responsive:[
-      {
-          breakpoint:768,
-          settings: {
-              slidesToShow:2
-          }
+  responsive: [
+    {
+      breakpoint:700,
+      settings:{
+        slidesToShow: 1,
+        slidesToScroll: 1,
       }
+    },
+    {
+      breakpoint:900,
+      settings:{
+        slidesToShow: 3,
+        slidesToScroll: 1,
+      }
+    }
   ]
   });
 });
